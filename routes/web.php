@@ -11,6 +11,31 @@
 |
 */
 
+use alibaba\nacos\request\naming\ListInstanceNaming;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/v1/test', "Api\ApiController@index");
+
+Route::get('/v1/api', function (Request $request) {
+
+    \alibaba\nacos\NacosConfig::setHost("http://121.229.9.243:8848/");
+
+    $listInstanceDiscovery = new \alibaba\nacos\request\naming\ListInstanceNaming();
+    $listInstanceDiscovery->setServiceName("giant-service-behavior");
+    $listInstanceDiscovery->setNamespaceId("public");
+    $listInstanceDiscovery->setClusters("");
+    $listInstanceDiscovery->setHealthyOnly(false);
+
+    $response = $listInstanceDiscovery->doRequest();
+    $content = $response->getBody()->getContents();
+//    var_dump($content);
+    $hosts = json_decode($content)->hosts;
+    $data = [
+        "db" => env("DB_DATABASE"),
+        "hosts" => $hosts
+    ];
+    return response()->json($data, 200);
 });
