@@ -43,13 +43,13 @@ class NacosRegister extends Command
 
         $naming = \alibaba\nacos\Naming::init(
             "laravel-nacos-service",
-            "192.168.1.14",
-            "8080",
+            "127.0.0.1",
+            "8000",
             "public",
             "",
             false
         );
-//        $naming->register();
+        $naming->register();
 
 //        $instanceList = $naming->listInstances();
 //        var_dump($instanceList);
@@ -57,20 +57,21 @@ class NacosRegister extends Command
 //        $instance = $naming->get();
 //        var_dump($instance);
 
-        $registerInstanceDiscovery = new RegisterInstanceNaming();
-        $registerInstanceDiscovery->setIp("192.168.1.14");
-        $registerInstanceDiscovery->setPort("8080");
-        $registerInstanceDiscovery->setNamespaceId("public");
-        $registerInstanceDiscovery->setWeight(1.0);
-        $registerInstanceDiscovery->setEnable(true);
-        $registerInstanceDiscovery->setHealthy(true);
-        $registerInstanceDiscovery->setMetadata('{"sn": 12345}');
-        $registerInstanceDiscovery->setClusterName("");
-        $registerInstanceDiscovery->setServiceName("laravel-nacos-service");
+//        $registerInstanceDiscovery = new RegisterInstanceNaming();
+//        $registerInstanceDiscovery->setIp("127.0.0.1");
+//        $registerInstanceDiscovery->setPort("8000");
+//        $registerInstanceDiscovery->setNamespaceId("public");
+//        $registerInstanceDiscovery->setWeight(1.0);
+//        $registerInstanceDiscovery->setEnable(true);
+//        $registerInstanceDiscovery->setHealthy(true);
+//        $registerInstanceDiscovery->setMetadata('{"type": "dline_api"}');
+//        $registerInstanceDiscovery->setClusterName("");
+//        $registerInstanceDiscovery->setServiceName("laravel-nacos-service");
+//        $response = $registerInstanceDiscovery->doRequest();
 
         while (true) {
-            $response = $registerInstanceDiscovery->doRequest();
-            var_dump($response);
+            $naming->beat();
+            var_dump(env("DB_DATABASE"));
             sleep(5);
         }
     }
