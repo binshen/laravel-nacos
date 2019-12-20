@@ -40,11 +40,16 @@ class NacosRefreshConfig extends Command
         // load nacos config file
         (new \Dotenv\Loader([], new \Dotenv\Environment\DotenvFactory(), true))->loadDirect(
             \alibaba\nacos\Nacos::init(
-                getenv("LARAVEL_NACOS_HOST"),
-                getenv("LARAVEL_ENV"),
-                getenv("LARAVEL_NACOS_DATAID"),
-                getenv("LARAVEL_NACOS_GROUPID"),
-                getenv("LARAVEL_NACOS_NAMESPACEID") ? : ""
+//                getenv("LARAVEL_NACOS_HOST"),
+//                getenv("LARAVEL_ENV"),
+//                getenv("LARAVEL_NACOS_DATAID"),
+//                getenv("LARAVEL_NACOS_GROUPID"),
+//                getenv("LARAVEL_NACOS_NAMESPACEID") ? : ""
+                "http://127.0.0.1:8848",
+                "dev",
+                "laravel-nacos-service",
+                "DEFAULT_GROUP",
+                "public"
             )->runOnce()
         );
     }

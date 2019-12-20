@@ -1,14 +1,17 @@
 <?php
-
 // load nacos config file
 // echo getenv("LARAVEL_ENV");die;
 \alibaba\nacos\NacosConfig::setSnapshotPath(dirname(__DIR__) . "/nacos/config");
 (new \Dotenv\Loader([], new \Dotenv\Environment\DotenvFactory(), true))->loadDirect(
     \alibaba\nacos\failover\LocalConfigInfoProcessor::getSnapshot(
-        getenv("LARAVEL_ENV"),
-        getenv("LARAVEL_NACOS_DATAID"),
-        getenv("LARAVEL_NACOS_GROUPID"),
-        getenv("LARAVEL_NACOS_NAMESPACEID") ? : "",
+//        getenv("LARAVEL_ENV"),
+//        getenv("LARAVEL_NACOS_DATAID"),
+//        getenv("LARAVEL_NACOS_GROUPID"),
+//        getenv("LARAVEL_NACOS_NAMESPACEID") ? : ""
+        "dev",
+        "laravel-nacos-service",
+        "DEFAULT_GROUP",
+        "public"
     )
 );
 
