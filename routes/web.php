@@ -21,10 +21,10 @@ Route::get('/v1/test', "Api\ApiController@index");
 
 Route::get('/v1/api', function (Request $request) {
 
-    \alibaba\nacos\NacosConfig::setHost("http://121.229.9.243:8848/");
+    \alibaba\nacos\NacosConfig::setHost("http://127.0.0.1:8848/");
 
     $listInstanceDiscovery = new \alibaba\nacos\request\naming\ListInstanceNaming();
-    $listInstanceDiscovery->setServiceName("giant-service-behavior");
+    $listInstanceDiscovery->setServiceName("laravel-nacos-service");
     $listInstanceDiscovery->setNamespaceId("public");
     $listInstanceDiscovery->setClusters("");
     $listInstanceDiscovery->setHealthyOnly(false);

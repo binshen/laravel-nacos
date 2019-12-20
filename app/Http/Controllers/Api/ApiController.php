@@ -9,6 +9,6 @@ class ApiController extends Controller
 {
     public function index(Request $request)
     {
-        return response()->json([], 201);
+        return response()->json($request->all(), 201);
     }
 }
